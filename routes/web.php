@@ -24,10 +24,10 @@ $app->post('/file', 'FilesController@create');
 $app->post('/rate', 'RatingController@create');
 
 // User logic
+$app->get('/user/{id}', 'UserController@get');
+
 $app->post('/login', 'AuthController@postLogin');
-
 $app->post('/me', 'AuthController@me');
-
 $app->post('/register', [
     'as' => 'user', 'uses' => 'UserController@store'
 ]);
@@ -35,7 +35,6 @@ $app->post('/register', [
 $app->get('/auth/steam', [
     'as' => 'SteamAuth', 'uses' => 'AuthController@redirectToProvider'
 ]);
-
 $app->get('/auth', [
     'as' => 'SteamRedirect', 'uses' => 'AuthController@handleProviderCallback'
 ]);

@@ -13,13 +13,17 @@ class UserController extends Controller
         
     }
 
+    public function get($id) 
+    {
+        $user = User::where('id', $id)->first();
+        return $user;
+    }
+
     public function store(Request $request)
     {
         $user = new User;
 
         $user->username = $request->username;
-        $user->name = $request->name;
-        $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
         $user->save();

@@ -27,15 +27,20 @@ class FilesController extends Controller
 
         $amount = 0;
         $arrayCount = count($rating);
-
+        
         foreach($rating as $r)
         {
             $amount = $amount + $r->amount;
         }
 
-        $average = ceil( $amount / $arrayCount );
+        if ($amount === 0) {
+            $file->rating = 0;
+        } else {
+            $average = ceil( $amount / $arrayCount );
 
-        $file->rating = $average;
+            $file->rating = $average;
+        }
+
         $file->user = $user;
         $file->category = $category;
 
